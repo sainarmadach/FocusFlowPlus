@@ -1,0 +1,13 @@
+# Node.js frontend
+client/node_modules
+client/dist
+
+# Python backend
+__pycache__/
+*.pyc
+.env
+
+# System files
+.DS_Store
+.vscode/
+.idea/
