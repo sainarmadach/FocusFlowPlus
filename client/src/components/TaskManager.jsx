@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
+const BASE_URL = "https://focusflow-backend.onrender.com";
+
 function TaskManager() {
   const [tasks, setTasks] = useState([]);
   const [title, setTitle] = useState("");
   const [editId, setEditId] = useState(null);
-  const [filter, setFilter] = useState("all"); // all | active | completed
+  const [filter, setFilter] = useState("all");
 
   const fetchTasks = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/tasks/");
+      const res = await axios.get(`${BASE_URL}/tasks/`);
       setTasks(res.data);
     } catch (error) {
       console.error("Error fetching tasks:", error);
@@ -26,7 +28,7 @@ function TaskManager() {
     };
 
     try {
-      await axios.post("http://localhost:8000/tasks/", newTask);
+      await axios.post(`${BASE_URL}/tasks/`, newTask);
       setTitle("");
       await fetchTasks();
     } catch (error) {
@@ -36,7 +38,7 @@ function TaskManager() {
 
   const handleToggleComplete = async (id) => {
     try {
-      await axios.put(`http://localhost:8000/tasks/${id}/toggle/`);
+      await axios.put(`${BASE_URL}/tasks/${id}/toggle/`);
       await fetchTasks();
     } catch (error) {
       console.error("Error toggling task:", error);
@@ -45,7 +47,7 @@ function TaskManager() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:8000/tasks/${id}/`);
+      await axios.delete(`${BASE_URL}/tasks/${id}/`);
       await fetchTasks();
     } catch (error) {
       console.error("Error deleting task:", error);
@@ -73,30 +75,17 @@ function TaskManager() {
 
       {/* Filter Buttons */}
       <div className="flex justify-center gap-4 mb-4">
-        <button
-          className={`px-4 py-2 rounded ${
-            filter === "all" ? "bg-blue-600" : "bg-gray-600"
-          } text-white`}
-          onClick={() => setFilter("all")}
-        >
-          All
-        </button>
-        <button
-          className={`px-4 py-2 rounded ${
-            filter === "active" ? "bg-blue-600" : "bg-gray-600"
-          } text-white`}
-          onClick={() => setFilter("active")}
-        >
-          Active
-        </button>
-        <button
-          className={`px-4 py-2 rounded ${
-            filter === "completed" ? "bg-blue-600" : "bg-gray-600"
-          } text-white`}
-          onClick={() => setFilter("completed")}
-        >
-          Completed
-        </button>
+        {["all", "active", "completed"].map((type) => (
+          <button
+            key={type}
+            className={`px-4 py-2 rounded ${
+              filter === type ? "bg-blue-600" : "bg-gray-600"
+            } text-white`}
+            onClick={() => setFilter(type)}
+          >
+            {type.charAt(0).toUpperCase() + type.slice(1)}
+          </button>
+        ))}
       </div>
 
       {/* Task Entry */}
