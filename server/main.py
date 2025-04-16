@@ -1,9 +1,9 @@
 # ✅ main.py
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from . import models, database
-from .routes import tasks
-
+import models
+import database
+from routes import tasks
 app = FastAPI()
 
 # Create DB tables

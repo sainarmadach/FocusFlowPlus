@@ -5,7 +5,7 @@ from sqlalchemy.orm import sessionmaker
 import os
 
 # Use Render's environment variable or fallback for local
-DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://postgres:password@localhost/focusflow")
+DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://postgres:test123@localhost/focusflow")
 
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
