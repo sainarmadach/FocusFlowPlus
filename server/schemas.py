@@ -12,11 +12,12 @@ class TaskCreate(TaskBase):
 class TaskUpdate(TaskBase):
     is_completed: Optional[bool] = None
 
-class TaskOut(TaskBase):
+class TaskOut(BaseModel):
     id: int
+    title: str
     is_completed: bool
     created_at: datetime
-    completed_at: Optional[datetime] = None
+    completed_at: Optional[datetime]
 
     class Config:
         orm_mode = True

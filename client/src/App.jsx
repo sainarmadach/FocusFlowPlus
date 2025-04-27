@@ -5,7 +5,9 @@ import TaskManager from "./components/TaskManager";
 import PomodoroTimer from "./components/PomodoroTimer";
 import MotivationGallery from "./components/MotivationGallery";
 import MoodTracker from "./components/MoodTracker";
-import AnalyticsDashboard from "./components/AnalyticsDashboard";
+import Progress from "./components/Progress";
+import Home from "./pages/Home";
+import HowItWorks from "./pages/HowItWorks";
 
 function App() {
   return (
@@ -28,19 +30,21 @@ function App() {
             <Link to="/mood" className="hover:underline">
               Mood Tracker
             </Link>
-            <Link to="/analytics" className="hover:underline">
-              Analytics
+            <Link to="/progress" className="hover:underline">
+              Progress
             </Link>
           </nav>
         </header>
         <main className="container mx-auto p-4">
           <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/how-it-works" element={<HowItWorks />} /> {/* 🆕 */}
             <Route path="/" element={<div>Welcome to FocusFlow+</div>} />
             <Route path="/tasks" element={<TaskManager />} />
             <Route path="/pomodoro" element={<PomodoroTimer />} />
             <Route path="/motivation" element={<MotivationGallery />} />
             <Route path="/mood" element={<MoodTracker />} />
-            <Route path="/analytics" element={<AnalyticsDashboard />} />
+            <Route path="/progress" element={<Progress />} />
           </Routes>
         </main>
       </div>

@@ -46,7 +46,7 @@ const MotivationGallery = () => {
   }));
 
   return (
-    <div>
+    <div className="min-h-screen bg-gradient-to-r from-[#100d15] via-[#170c21] to-[#1d0612] text-white p-6">
       <h2 className="text-2xl font-bold text-center mb-6">
         🖼️ Motivation Gallery
       </h2>
